@@ -1,0 +1,1 @@
+INSERT INTO users (serial, username, credit, is_admin) VALUES (%(serial)s, %(username)s, %(credit)d, %(is_admin)b)

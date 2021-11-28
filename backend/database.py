@@ -4,9 +4,9 @@ from mysql.connector import errorcode
 # Login Data
 # TODO load from config | hard coded no good
 HOST = "localhost"
-USERNAME = "freezy"
+USERNAME = "freezyyy"
 PASSWORD = "shittyfreez/dev"
-DATABASE = "freezy"
+DATABASE = "freezyyy"
 PORT = 3306
 
 
@@ -23,12 +23,20 @@ except mysql.connector.Error as err:
 else:
     # create tables
     cursor = connection.cursor()
-    create_tables = open("county/tables.sql").read()
-    cursor.execute(create_tables)
+    create_tables = open("backend/sql/tables.sql").read()
+    cursor.execute(create_tables, multi=True)
 
 
+# sets a value in a table at identifier
+#
+# creates a cursor with current connection
+# executes SQL statement
+# commits changes to db
 def set_value(table, value_name, value, identifier, id_value):
     c = connection.cursor()
-    c.execute("UPDATE %s SET %s='%s' WHERE %s=%s; ", (table, value_name, value, identifier, id_value))
+    c.execute("UPDATE %s SET %s='%s' WHERE %s=%s;" % (table, value_name, value, identifier, id_value))
     connection.commit()
 
+
+def get_value(table, value_name, value):
+    pass

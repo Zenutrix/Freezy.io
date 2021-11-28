@@ -1,4 +1,34 @@
-from county import database
+from backend import database
+
+_drinks = {}
+_users = {}
+
+
+def cache_data():
+    database.connection.connect()
+    c = database.connection.cursor()  # create cursor
+    c.execute(open('backend/sql/get_all_users.sql').read(-1))
+    for user_id, serial, username, credit, is_admin in c:
+        user = User(serial, username, credit, is_admin, user_id)
+        _users[user.user_id] = user
+
+    c = database.connection.cursor()  # create cursor
+    c.execute(open('backend/sql/get_all_drinks.sql').read(-1))
+    for drink_id, drink_name, price, description in c:
+        drink = Drink(drink_id, drink_name, price, description)
+        _drinks[drink.drink_id] = drink
+
+
+def get_users():
+    return _users.values()
+
+
+def get_drinks():
+    return _drinks.values()
+
+
+def get_drink_by_id(drink_id):
+    return _drinks.get(drink_id)
 
 
 class Drink:
@@ -9,6 +39,14 @@ class Drink:
         self.description = description
 
     # TODO classmethod from_id()
+
+    def to_json(self):
+        return {
+            'drink_id': self.drink_id,
+            'drink_name': self.drink_name,
+            'price': self.price,
+            'description': self.description,
+        }
 
     # load the drinkdata from the database by executing an sql statement and returning the results as a dict
     def _load_from_db(self):
@@ -42,14 +80,25 @@ class User:
         self.credit = credit
         self.is_admin = is_admin
 
+    def to_json(self):
+        return {
+            'user_id': self.user_id,
+            'serial': self.serial,
+            'username': self.username,
+            'credit': self.credit,
+            'is_admin': self.is_admin,
+        }
+
     def __str__(self):
-        return "<User> id:%s, serial:%s, name:%s, credit:%s, is_admin:%s>" % (self.user_id, self.serial, self.username, self.credit, self.is_admin)
+        return "<User> id:%s, serial:%s, name:%s, credit:%s, is_admin:%s>" % (
+            self.user_id, self.serial, self.username, self.credit, self.is_admin)
 
     @classmethod
     def from_serial(cls, serial):
         cls.serial = serial
         userdata = cls._load_from_db(cls)
-        return cls(user_id=userdata['user_id'], serial=serial, username=userdata['username'], credit=userdata['credit'], is_admin=userdata['is_admin'])
+        return cls(user_id=userdata['user_id'], serial=serial, username=userdata['username'], credit=userdata['credit'],
+                   is_admin=userdata['is_admin'])
 
     # load the userdata from the database by executing an sql statement and returning the results as a dict
     def _load_from_db(self):
@@ -57,8 +106,16 @@ class User:
         c = database.connection.cursor()  # create cursor
         c.execute("""SELECT user_id, username, credit, is_admin FROM users WHERE serial='%s'""" % self.serial)
         for user_id, username, credit, is_admin in c:
-            c.close()
             return {"user_id": user_id, "username": username, "credit": credit, "is_admin": is_admin}
+
+    def reload(self):
+        database.connection.connect()  # connect to db
+        c = database.connection.cursor()  # create cursor
+        c.execute("""SELECT username, credit, is_admin FROM users WHERE serial='%s'""" % self.serial)
+        for username, credit, is_admin in c:
+            self.username = username
+            self.credit = credit
+            self.is_admin = is_admin
 
     def _update_field(self, field):
         database.connection.connect()
@@ -86,7 +143,5 @@ class User:
         database.set_value("users", "is_admin", is_admin, "user_id", self.user_id)
         self._update_field("is_admin")
 
-    def buy(self):
-        # TODO buy drink
-        # maybe crapf
-        pass
+
+cache_data()
