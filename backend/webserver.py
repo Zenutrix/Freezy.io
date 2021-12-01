@@ -1,5 +1,3 @@
-import json
-
 import cherrypy
 import cherrypy_cors
 

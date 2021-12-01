@@ -4,9 +4,9 @@ from mysql.connector import errorcode
 # Login Data
 # TODO load from config | hard coded no good
 HOST = "localhost"
-USERNAME = "freezyyy"
+USERNAME = "freezy"
 PASSWORD = "shittyfreez/dev"
-DATABASE = "freezyyy"
+DATABASE = "freezy"
 PORT = 3306
 
 
