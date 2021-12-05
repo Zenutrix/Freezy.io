@@ -1,20 +1,13 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="http://Frezzy.io">
     <img src="http://laniax.eu/LOGOGITFREZZY.png" alt="Logo" width="250" height="50">
   </a>
-   <h3 align="center">Zahlungssystem für Getränke</h3>
+   <h3 align="center">Payment System for Refrigerators</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Ideal for businesses and communes
     <br />
     <a href="https://github.com/Thomas-Austria/Frezzy.io/"><strong>Explore the docs »</strong></a>
     <br />
@@ -28,26 +21,48 @@
 </p>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
-ToDo
+This project was born from the need of tracking expenses for our office fridge.
+So we strapped a screen and a pi to it and made it "smart".
+
+authentication works with RFID tags.
+
+This system is based on trust. No locking mechanisms... yet.
 
 <!-- GETTING STARTED -->
-## Getting Started
+# Getting Started
 
-Ich machen so, Auto machen so ... Unfall
-
+  - Raspberry Pi
+  - MFRC522
+  - 7 x Cable
+  - Some display
+  
 ### Prerequisites
-
-Zauberei!
+```shell
+$ sudo apt install nginx mysql mysql-server
+```
 
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/Thomas-Austria/Frezzy.io/
+   ```shell
+   $ git clone https://github.com/Thomas-Austria/Frezzy.io/
    ```
-3. Enter your Credentials in `master.py`
+2. Configure nginx 
+   1. copy freezy.conf to /etc/nginx/sites-available 
+   2. create link in /etc/nginx/sites-enabled to /etc/nginx/sites-available
+   ```shell
+   $ sudo cp Freezy.io/freezy.conf /etc/nginx/sites-available
+   ```
+   ```shell
+   $ sudo ln /etc/nginx/sites-available/freezy.conf /etc/nginx/sites-enabled
+   ```
+2. Install python libraries
+   ```shell
+   $ pip3 install -r requirements.txt 
+   ```
+3. Enter your Credentials in `database.py`
    ```py
    DB = 'FREZZY';
    DB_PW = 'FREZZY';
@@ -56,10 +71,30 @@ Zauberei!
    
    
    <!-- USAGE EXAMPLES -->
-## Usage
+# Usage
+Select the working directory
+```shell
+$ cd Freezy.io
+```
+### Run:
+Start the backend
+```shell
+$ python3 wsgi.py
+```
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Start the backend in a screen
+```shell
+$ screen -S freezy_backend python3 wsgi.py
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Manage the backend
 
+use the admin script
+```shell
+$ python3 -m backend.admin
+```
 
+create a new user
+```shell
+$ python3 -m backend.admin createuser
+```
