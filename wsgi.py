@@ -2,7 +2,7 @@ import cherrypy
 import cherrypy_cors
 from backend import Freezy, User, start_reader
 
-debug = True
+debug = False
 app = cherrypy.tree.mount(Freezy(), '/api/')
 app.toolboxes['cors'] = cherrypy_cors.tools
 
@@ -28,4 +28,4 @@ if __name__ == '__main__':
     if debug:
         debug_user()
     start_reader(debug=debug)
-    cherrypy.quickstart(Freezy())
+    cherrypy.quickstart(app)
