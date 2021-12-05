@@ -82,7 +82,7 @@ Start the backend
 $ python3 wsgi.py
 ```
 
-Start the backend in a screen
+or start the backend in a screen
 ```shell
 $ screen -S freezy_backend python3 wsgi.py
 ```
