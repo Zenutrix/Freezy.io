@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="http://Frezzy.io">
+  <a href="http://Freezy.io">
     <img src="http://laniax.eu/LOGOGITFREZZY.png" alt="Logo" width="250" height="50">
   </a>
    <h3 align="center">Payment System for Refrigerators</h3>
@@ -9,14 +9,14 @@
   <p align="center">
     Ideal for businesses and communes
     <br />
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/">View Demo</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/">View Demo</a>
     ·
-    <a href="https://github.com/Thomas-Austria/Frezzy.io//issues">Report Bug</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io//issues">Report Bug</a>
     ·
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/issues">Request Feature</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/issues">Request Feature</a>
   </p>
 </p>
 
@@ -64,7 +64,7 @@ $ python3 -m pip install -r requirements.txt
 
 1. clone the repo
    ```shell
-   $ git clone https://github.com/Thomas-Austria/Frezzy.io/
+   $ git clone https://github.com/Thomas-Austria/Freezy.io/
    ```
 2. Configure nginx\
    copy freezy.conf to /etc/nginx/sites-available
@@ -108,7 +108,7 @@ Start the backend
 $ python3 wsgi.py
 ```
 
-Start the backend in a screen
+or start the backend in a screen
 ```shell
 $ screen -S freezy_backend python3 wsgi.py
 ```
