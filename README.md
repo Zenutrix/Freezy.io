@@ -1,22 +1,22 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="http://Frezzy.io">
-    <img src="http://laniax.eu/LOGOGITFREZZY.png" alt="Logo" width="250" height="50">
+  <a href="http://Freezy.io">
+    <img src="http://laniax.eu/LOGOGITFREEZY.png" alt="Logo" width="250" height="50">
   </a>
    <h3 align="center">Payment System for Refrigerators</h3>
 
   <p align="center">
     Ideal for businesses and communes
     <br />
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/">View Demo</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/">View Demo</a>
     ·
-    <a href="https://github.com/Thomas-Austria/Frezzy.io//issues">Report Bug</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io//issues">Report Bug</a>
     ·
-    <a href="https://github.com/Thomas-Austria/Frezzy.io/issues">Request Feature</a>
+    <a href="https://github.com/Thomas-Austria/Freezy.io/issues">Request Feature</a>
   </p>
 </p>
 
@@ -47,7 +47,7 @@ $ sudo apt install nginx mysql mysql-server
 
 1. Clone the repo
    ```shell
-   $ git clone https://github.com/Thomas-Austria/Frezzy.io/
+   $ git clone https://github.com/Thomas-Austria/Freezy.io/
    ```
 2. Configure nginx 
    1. copy freezy.conf to /etc/nginx/sites-available 
@@ -64,9 +64,9 @@ $ sudo apt install nginx mysql mysql-server
    ```
 3. Enter your Credentials in `database.py`
    ```py
-   DB = 'FREZZY';
-   DB_PW = 'FREZZY';
-   DB_User = 'FREZZY';
+   DB = 'DB';
+   DB_PW = 'DB_PW';
+   DB_User = 'DB_USER';
    ```
    
    
