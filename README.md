@@ -67,11 +67,11 @@ $ python3 -m pip install -r requirements.txt
    $ git clone https://github.com/Thomas-Austria/Freezy.io/
    ```
 2. Configure nginx\
-   copy freezy.conf to /etc/nginx/sites-available
+   copy `freezy.conf` to `/etc/nginx/sites-available`
    ```shell
    $ sudo cp Freezy.io/freezy.conf /etc/nginx/sites-available
    ```
-   create link in /etc/nginx/sites-enabled to /etc/nginx/sites-available
+   create link in `/etc/nginx/sites-enabled` to `/etc/nginx/sites-available`
    ```shell
    $ sudo ln /etc/nginx/sites-available/freezy.conf /etc/nginx/sites-enabled
    ```
