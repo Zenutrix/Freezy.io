@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="http://Freezy.io">
-    <img src="http://laniax.eu/LOGOGITFREEZY.png" alt="Logo" width="250" height="50">
+    <img src="http://laniax.eu/LOGOGITFREZZY.png" alt="Logo" width="250" height="50">
   </a>
    <h3 align="center">Payment System for Refrigerators</h3>
 
