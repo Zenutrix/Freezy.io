@@ -33,40 +33,66 @@ This system is based on trust. No locking mechanisms... yet.
 <!-- GETTING STARTED -->
 # Getting Started
 
+Materials:
   - Raspberry Pi
   - MFRC522
   - 7 x Cable
   - Some display
   
-### Prerequisites
-```shell
+## Prerequisites
+Software Dependencies:
+  - mysql-server
+  - nginx
+  - mysql
+  ```shell
 $ sudo apt install nginx mysql mysql-server
 ```
 
-### Installation
+Python dependencies:
+  - CherryPy~=18.6.1
+  - mysql~=0.0.3
+  - mysql-connector-python~=8.0.26
+  - cherrypy_cors
 
-1. Clone the repo
+<b>IF YOU'RE USING VENV REMEMBER TO ACTIVATE IT:</b>
+```source venv/bin/activate```
+```shell
+$ python3 -m pip install -r requirements.txt
+```
+
+## Installation
+
+1. clone the repo
    ```shell
    $ git clone https://github.com/Thomas-Austria/Frezzy.io/
    ```
-2. Configure nginx 
-   1. copy freezy.conf to /etc/nginx/sites-available 
-   2. create link in /etc/nginx/sites-enabled to /etc/nginx/sites-available
+2. Configure nginx\
+   copy freezy.conf to /etc/nginx/sites-available
    ```shell
    $ sudo cp Freezy.io/freezy.conf /etc/nginx/sites-available
    ```
+   create link in /etc/nginx/sites-enabled to /etc/nginx/sites-available
    ```shell
    $ sudo ln /etc/nginx/sites-available/freezy.conf /etc/nginx/sites-enabled
    ```
-2. Install python libraries
+3. Set up SQL-Server
+
+   configure mysql
    ```shell
-   $ pip3 install -r requirements.txt 
+   $ sudo su
+   $ mysql
+   > CREATE USER 'freezy'@'%' IDENTIFIED BY 'password';
+   > GRANT ALL PRIVILEGES ON * . * TO 'freezy'@'%';
+   > FLUSH PRIVILEGES;
    ```
-3. Enter your Credentials in `database.py`
+
+   Enter your Credentials in `database.py`
    ```py
-   DB = 'FREZZY';
-   DB_PW = 'FREZZY';
-   DB_User = 'FREZZY';
+   HOST = "localhost"
+   USERNAME = "freezy"
+   PASSWORD = "password"
+   DATABASE = "freezy"
+   PORT = 3306
    ```
    
    
