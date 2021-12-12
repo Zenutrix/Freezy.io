@@ -1,11 +1,12 @@
 import cherrypy
 import cherrypy_cors
-import backend.database
-
-from backend import Freezy, start_reader
+import backend.database as database
+import backend.webserver as server
+import backend.card_reader as reader
+import backend.models as models
 
 debug = False
-app = cherrypy.tree.mount(Freezy(), '/api/')
+app = cherrypy.tree.mount(server.Freezy(), '/api/')
 app.toolboxes['cors'] = cherrypy_cors.tools
 
 if __name__ == '__main__':
@@ -16,8 +17,9 @@ if __name__ == '__main__':
     })
 
     try:
-        start_reader(debug=debug)
+        reader.start(debug=debug)
+        models.cache_data()
         cherrypy.quickstart(app)
-    except KeyboardInterrupt:
-        backend.database.close()
+    finally:
+        database.close()
         print("closing db connection")

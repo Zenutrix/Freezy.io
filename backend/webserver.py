@@ -1,7 +1,7 @@
 import cherrypy
 import cherrypy_cors
-
-from backend import core, models
+import backend.models as models
+import backend.core as core
 
 
 class Freezy(object):

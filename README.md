@@ -44,26 +44,36 @@ Software Dependencies:
   - mysql-server
   - nginx
   - mysql
-  ```shell
-$ sudo apt install nginx mariadb-server python3-venv
+  - mfrc522 library needs to be installed from github
+
+```shell
+sudo apt install nginx mariadb-server python3-venv
 ```
 
 # Installation
 clone the repo and `cd` into it:
 ```shell
-$ git clone https://github.com/Thomas-Austria/Freezy.io/
+git clone https://github.com/Thomas-Austria/Freezy.io/
 ```
 
 ```shell
-$ cd Freezy.io
+cd Freezy.io
 ```
 
 \
 (optional) create venv:
 ```shell
-$ python3 -m venv freezy_backend
+python3 -m venv freezy_backend
 ```
 <b>IF YOU'RE USING VENV REMEMBER TO ACTIVATE IT:</b> `source venv/bin/activate`
+
+install mfrc522:
+```shell
+git clone https://github.com/pimylifeup/MFRC522-python.git
+cd MFRC522-python
+python3 setup.py build.py
+python3 setup.py install.py
+```
 
 \
 install requirements:
@@ -85,11 +95,10 @@ $ python3 -m pip install -r requirements.txt
 
    configure mysql:
    ```shell
-   $ sudo su
-   $ mysql
-   > CREATE USER 'freezy'@'localhost' IDENTIFIED BY 'password';
-   > GRANT ALL PRIVILEGES ON freezy . * TO 'freezy'@'localhost';
-   > FLUSH PRIVILEGES;
+   sudo mysql
+   CREATE USER 'freezy'@'localhost' IDENTIFIED BY 'password';
+   GRANT ALL PRIVILEGES ON freezy . * TO 'freezy'@'localhost';
+   FLUSH PRIVILEGES;
    ```
 
    Enter your Credentials in `database.py`:

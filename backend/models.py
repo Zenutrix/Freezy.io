@@ -1,4 +1,4 @@
-from backend import database
+import backend.database as database
 
 _drinks = {}
 _users = {}
@@ -142,6 +142,3 @@ class User:
     def set_admin(self, is_admin):
         database.set_value("users", "is_admin", is_admin, "user_id", self.user_id)
         self._update_field("is_admin")
-
-
-cache_data()

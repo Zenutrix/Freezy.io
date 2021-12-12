@@ -1,9 +1,7 @@
 # TODO read Serial
 import threading
 import time
-
-from backend import core
-from backend.core import set_user_by_serial
+import backend.core as core
 
 debug_serial = "0x3d:0xe4:0x12:0x62"
 debug_sleep = 5
@@ -15,7 +13,7 @@ def debug_loop():
             print('Pretending to read debug_serial in ' + str(debug_sleep))
             time.sleep(debug_sleep)
             print("'Reading' " + debug_serial)
-            set_user_by_serial(debug_serial)
+            core.set_user_by_serial(debug_serial)
 
 
 def read_loop():
@@ -32,10 +30,10 @@ def read_loop():
         if status == mifare_reader.MI_OK:
             serial = hex(uid[0]) + ':' + hex(uid[1]) + ':' + hex(uid[2]) + ':' + hex(uid[3])
             print('MIFARE device detected. serial:' + serial)
-            set_user_by_serial(serial)
+            core.set_user_by_serial(serial)
 
 
-def start_reader(debug=False):
+def start(debug=False):
     if debug:
         print('Starting debug MIFARE Reader')
         debug_thread = threading.Thread(target=debug_loop, name="DEBUG-READER", daemon=True)

@@ -1,4 +1,5 @@
-from backend import database, models
+import backend.database as database
+import backend.models as models
 
 _current_user = None
 

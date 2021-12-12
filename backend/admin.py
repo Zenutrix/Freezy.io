@@ -4,7 +4,7 @@ import sys
 import requests as requests
 
 import backend.card_reader
-from backend import User
+import backend.models as models
 
 LOG_FORMAT_CONSOLE = "[%(levelname)s] %(message)s"
 
@@ -71,7 +71,7 @@ def get_is_admin():
 
 
 def create_tables():
-    backend.database.create_tables()
+    backend.database.ct()
 
 
 if __name__ == '__main__':
@@ -89,7 +89,7 @@ if __name__ == '__main__':
         is_admin = get_is_admin()
         serial = get_serial()
         if username and serial:
-            new_user = User(username=username, serial=serial, credit=credit, is_admin=is_admin)
+            new_user = models.User(username=username, serial=serial, credit=credit, is_admin=is_admin)
             try:
                 new_user.create()
                 logger.info("New User created")
