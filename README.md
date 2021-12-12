@@ -45,7 +45,7 @@ Software Dependencies:
   - nginx
   - mysql
   ```shell
-$ sudo apt install nginx mysql mysql-server
+$ sudo apt install nginx mariadb-server python3-venv
 ```
 
 Python dependencies:
