@@ -48,46 +48,52 @@ Software Dependencies:
 $ sudo apt install nginx mariadb-server python3-venv
 ```
 
-Python dependencies:
-  - CherryPy~=18.6.1
-  - mysql~=0.0.3
-  - mysql-connector-python~=8.0.26
-  - cherrypy_cors
+# Installation
+clone the repo and `cd` into it:
+```shell
+$ git clone https://github.com/Thomas-Austria/Freezy.io/
+```
 
-<b>IF YOU'RE USING VENV REMEMBER TO ACTIVATE IT:</b>
-```source venv/bin/activate```
+```shell
+$ cd Freezy.io
+```
+
+\
+(optional) create venv:
+```shell
+$ python3 -m venv freezy_backend
+```
+<b>IF YOU'RE USING VENV REMEMBER TO ACTIVATE IT:</b> `source venv/bin/activate`
+
+\
+install requirements:
 ```shell
 $ python3 -m pip install -r requirements.txt
 ```
 
-## Installation
-
-1. clone the repo
-   ```shell
-   $ git clone https://github.com/Thomas-Austria/Freezy.io/
-   ```
-2. Configure nginx\
-   copy `freezy.conf` to `/etc/nginx/sites-available`
+## Configuration   
+1. Configure nginx\
+   copy `freezy.conf` to `/etc/nginx/sites-available`:
    ```shell
    $ sudo cp Freezy.io/freezy.conf /etc/nginx/sites-available
    ```
-   create link in `/etc/nginx/sites-enabled` to `/etc/nginx/sites-available`
+   create link in `/etc/nginx/sites-enabled` to `/etc/nginx/sites-available`:
    ```shell
    $ sudo ln /etc/nginx/sites-available/freezy.conf /etc/nginx/sites-enabled
    ```
-3. Set up SQL-Server
+2. Set up SQL-Server
 
-   configure mysql
+   configure mysql:
    ```shell
    $ sudo su
    $ mysql
-   > CREATE USER 'freezy'@'%' IDENTIFIED BY 'password';
-   > GRANT ALL PRIVILEGES ON * . * TO 'freezy'@'%';
+   > CREATE USER 'freezy'@'localhost' IDENTIFIED BY 'password';
+   > GRANT ALL PRIVILEGES ON freezy . * TO 'freezy'@'localhost';
    > FLUSH PRIVILEGES;
    ```
 
-   Enter your Credentials in `database.py`
-   ```py
+   Enter your Credentials in `database.py`:
+   ```python
    HOST = "localhost"
    USERNAME = "freezy"
    PASSWORD = "password"
@@ -98,29 +104,25 @@ $ python3 -m pip install -r requirements.txt
    
    <!-- USAGE EXAMPLES -->
 # Usage
-Select the working directory
-```shell
-$ cd Freezy.io
-```
 ### Run:
-Start the backend
+Start the backend:
 ```shell
 $ python3 wsgi.py
 ```
 
-or start the backend in a screen
+or start the backend in a screen:
 ```shell
 $ screen -S freezy_backend python3 wsgi.py
 ```
 
-### Manage the backend
-
-use the admin script
+### Administration
+use the admin script:
 ```shell
 $ python3 -m backend.admin
 ```
 
-create a new user
+\
+create a new user:
 ```shell
 $ python3 -m backend.admin createuser
 ```
