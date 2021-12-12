@@ -71,8 +71,7 @@ def get_is_admin():
 
 
 def create_tables():
-    import database
-    database.create_tables()
+    backend.database.create_tables()
 
 
 if __name__ == '__main__':

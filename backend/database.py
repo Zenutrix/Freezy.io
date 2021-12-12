@@ -16,7 +16,7 @@ def create_tables():
     cursor = connection.cursor()
     create_tables_sql = open("backend/sql/tables.sql").read()
     connection.connect()
-    cursor.execute(create_tables, multi=True)
+    cursor.execute(create_tables_sql, multi=True)
 
 
 # establish connection, handle errors
@@ -29,8 +29,9 @@ except mysql.connector.Error as err:
         print("Database does not exist")
     else:
         print(err)
-else:
-    create_tables()
+finally:
+    if connection:
+        create_tables()
 
 
 # sets a value in a table at identifier
