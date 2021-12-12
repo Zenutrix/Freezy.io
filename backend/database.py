@@ -1,3 +1,5 @@
+from time import sleep
+
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -5,7 +7,7 @@ from mysql.connector import errorcode
 # TODO load from config | hard coded no good
 HOST = "localhost"
 USERNAME = "freezy"
-PASSWORD = "shittyfreez/dev"
+PASSWORD = "password"
 DATABASE = "freezy"
 PORT = 3306
 
@@ -22,8 +24,10 @@ except mysql.connector.Error as err:
         print(err)
 else:
     # create tables
+    sleep(1)
     cursor = connection.cursor()
     create_tables = open("backend/sql/tables.sql").read()
+    connection.connect()
     cursor.execute(create_tables, multi=True)
 
 
@@ -40,3 +44,7 @@ def set_value(table, value_name, value, identifier, id_value):
 
 def get_value(table, value_name, value):
     pass
+
+
+def close():
+    connection.close()

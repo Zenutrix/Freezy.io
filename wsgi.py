@@ -19,6 +19,7 @@ def debug_user():
 
 
 if __name__ == '__main__':
+    import backend.database
     cherrypy.config.update({
         'cors.expose.on': True,
         'server.socket_host': '127.0.0.1',
@@ -27,5 +28,9 @@ if __name__ == '__main__':
 
     if debug:
         debug_user()
-    start_reader(debug=debug)
-    cherrypy.quickstart(app)
+    try:
+        start_reader(debug=debug)
+        cherrypy.quickstart(app)
+    except KeyboardInterrupt:
+        backend.database.close()
+        print("closing db connection")
