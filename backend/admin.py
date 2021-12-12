@@ -70,13 +70,19 @@ def get_is_admin():
     return is_admin
 
 
+def create_tables():
+    import database
+    database.create_tables()
+
+
 if __name__ == '__main__':
 
     def print_help():
         logger.info("Usage: python3 -m backend.admin [COMMAND] [PARAMETERS]")
+        logger.info("  python3 -m backend.admin create_tables")
         logger.info("  python3 -m backend.admin adduser")
         # print("  python3 -m backend.admin deluser")
-        logger.info("  python3 -m backend.admin printserial")
+        logger.info("  python3 -m backend.admin print_serial")
 
     def add_user():
         username = get_username()
@@ -111,7 +117,9 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         print_help()
     if len(sys.argv) == 2:
-        if sys.argv[1] == 'help':
+        if sys.argv[1] == 'create_tables':
+            create_tables()
+        elif sys.argv[1] == 'help':
             print_help()
         elif sys.argv[1] == 'adduser':
             # logger.info("Adding User...")

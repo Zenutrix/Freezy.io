@@ -12,6 +12,13 @@ DATABASE = "freezy"
 PORT = 3306
 
 
+def create_tables():
+    cursor = connection.cursor()
+    create_tables_sql = open("backend/sql/tables.sql").read()
+    connection.connect()
+    cursor.execute(create_tables, multi=True)
+
+
 # establish connection, handle errors
 try:
     connection = mysql.connector.connect(host=HOST, user=USERNAME, password=PASSWORD, database=DATABASE)
@@ -23,12 +30,7 @@ except mysql.connector.Error as err:
     else:
         print(err)
 else:
-    # create tables
-    sleep(1)
-    cursor = connection.cursor()
-    create_tables = open("backend/sql/tables.sql").read()
-    connection.connect()
-    cursor.execute(create_tables, multi=True)
+    create_tables()
 
 
 # sets a value in a table at identifier
@@ -40,10 +42,6 @@ def set_value(table, value_name, value, identifier, id_value):
     c = connection.cursor()
     c.execute("UPDATE %s SET %s='%s' WHERE %s=%s;" % (table, value_name, value, identifier, id_value))
     connection.commit()
-
-
-def get_value(table, value_name, value):
-    pass
 
 
 def close():
