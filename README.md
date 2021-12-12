@@ -30,13 +30,20 @@ authentication works with RFID tags.
 
 This system is based on trust. No locking mechanisms... yet.
 
+<!-- ToDo -->
+# ToDo
+- [ ] Web based Admin Panel
+- [ ] Performance improvements 
+- [ ] Maybe EAN Barcode Scanning support
+- [ ] Support for locking mechanisms
+
 <!-- GETTING STARTED -->
 # Getting Started
 
 Materials:
   - Raspberry Pi
   - MFRC522
-  - 7 x Cable
+  - 7 x Cable (To Connect the MFRC 522 to the Pi)
   - Some display
   
 ## Prerequisites
